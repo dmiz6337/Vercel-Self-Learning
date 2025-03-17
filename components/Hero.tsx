@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section className="text-center my-32 mx-4 sm:mx-8 md:mx-16 lg:mx-24">
       <div
-        className="h-screen bg-cover bg-center"
+        className="w-screen h-screen bg-cover bg-center"
         style={{ backgroundImage: "url('/statics/banner.jpeg')" }}
       >
         <h1 className="font-sans text-3xl tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl dark:text-white mb-6">
