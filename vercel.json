@@ -3,8 +3,7 @@
     "builds": [
       {
         "src": "layout.tsx",
-        "use": "@vercel/next",
-        "buildCommand": "npm run build"
+        "use": "@vercel/next"
       }
     ],
     "env": {
