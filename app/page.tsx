@@ -15,12 +15,12 @@ export default function Page() {
       <Header />
       <main>
         <div
-          className="w-screen h-screen bg-cover bg-center"
+          className="w-screen h-screen bg-cover bg-center bg-top"
           style={{ backgroundImage: "url('/statics/banner.jpeg')" }}
         >
           <Hero />
         </div>
-        <Features />
+        <Features /> 
         <Section
           leftHalf={
             <>
@@ -37,7 +37,6 @@ export default function Page() {
             <Image src={"/products/phone.png"} alt="section-image" width={500} height={100} className="w-1/2 h-auto" />
           }
         />
-        <Customers />
         <Section
           leftHalf={<Accordion />}
           rightHalf={
@@ -53,7 +52,6 @@ export default function Page() {
           }
         />
         <Reviews />
-        <Download />
       </main>
       <Footer />
     </div>
