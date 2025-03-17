@@ -17,8 +17,9 @@ export default function Page() {
           className="w-screen h-screen bg-cover bg-center bg-top"
           style={{ backgroundImage: "url('/statics/banner.jpeg')" }}
         >
+        <Hero />
+      </div>
         <main>
-          <Hero />
           <Features /> 
           <Section
             leftHalf={
@@ -52,7 +53,6 @@ export default function Page() {
           />
           <Reviews />
         </main>
-      </div>
       <Footer />
     </div>
   );
