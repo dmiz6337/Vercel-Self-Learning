@@ -1,0 +1,26 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "layout.tsx",
+        "use": "@vercel/next",
+        "buildCommand": "npm run build"
+      }
+    ],
+    "env": {
+      "VERCEL_ENV": "development",
+      "VERCEL_URL": "strata-body-corporate.vercel.app",
+      "VERCEL_GIT_PROVIDER": "github",
+      "VERCEL_GIT_BRANCH": "main",
+      "VERCEL_GIT_COMMIT_AUTHOR_LOGIN": "dmiz6337",
+      "VERCEL": "1"
+    },
+    "regions": ["syd1"],
+    "cron": [
+      {
+        "path": "/api/cleanup",
+        "schedule": "0 0 * * *"
+      }
+    ],
+    "cleanUrls": true
+  }
