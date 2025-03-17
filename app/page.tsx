@@ -14,7 +14,12 @@ export default function Page() {
     <div className="flex flex-col min-h-screen bg-white dark:bg-black">
       <Header />
       <main>
-        <Hero />
+        <div
+          className="w-screen h-screen bg-cover bg-center"
+          style={{ backgroundImage: "url('/statics/banner.jpeg')" }}
+        >
+          <Hero />
+        </div>
         <Features />
         <Section
           leftHalf={
