@@ -16,11 +16,5 @@
       "VERCEL": "1"
     },
     "regions": ["syd1"],
-    "cron": [
-      {
-        "path": "/api/cleanup",
-        "schedule": "0 0 * * *"
-      }
-    ],
     "cleanUrls": true
   }
