@@ -5,7 +5,7 @@ import "styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Strata Committee Owners Corporation Portal",
-  description: "Next JS SaaS Starter Template",
+  description: "Strata Committee Owners Corporation Portal",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
