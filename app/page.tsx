@@ -19,8 +19,9 @@ export default function Page() {
         >
         <Hero />
       </div>
+      <div className="h-20" ></div>
         <main>
-          <Features  className="pt-20" /> 
+          <Features/> 
           <Section
             leftHalf={
               <>
