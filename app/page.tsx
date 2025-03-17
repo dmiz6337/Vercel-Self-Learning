@@ -13,13 +13,12 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-black">
       <Header />
-      <main>
-        <div
+      <div
           className="w-screen h-screen bg-cover bg-center bg-top"
           style={{ backgroundImage: "url('/statics/banner.jpeg')" }}
-        >
-          <Hero />
-        </div>
+        ></div>
+      <main>
+        <Hero />
         <Features /> 
         <Section
           leftHalf={
