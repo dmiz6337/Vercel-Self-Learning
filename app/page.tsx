@@ -20,7 +20,7 @@ export default function Page() {
         <Hero />
       </div>
         <main>
-          <Features /> 
+          <Features  className="pt-20" /> 
           <Section
             leftHalf={
               <>
