@@ -31,10 +31,11 @@ const Contact = () => {
                     href="/"
                     className="bg-black text-white dark:bg-white dark:text-black px-5 py-2 rounded-md text-base font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300"
                     >
-                    Learn More
+                    Return Home
                     </Link>
                 </div>
             </main>
+            <div className="h-20" ></div>
             <Footer />
         </div>
     );
