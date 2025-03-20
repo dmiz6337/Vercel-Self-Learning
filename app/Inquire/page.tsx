@@ -48,7 +48,7 @@ export default function InquiriesPage() {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type your inquiry..."
                     required
-                    className="w-full p-2 border rounded h-24"
+                    className="w-full p-2 border rounded h-24 text-white placeholder-gray-400"
                     />
                     <button
                     type="submit"
