@@ -9,6 +9,7 @@ export default function InquiriesPage() {
   const [message, setMessage] = useState('');
   const [responseMsg, setResponseMsg] = useState('');
   const [loading, setLoading] = useState(false);
+  const [inquiries, setInquiries] = useState<string[]>([]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,6 +37,12 @@ export default function InquiriesPage() {
     }
   };
 
+  const fetchInquiries = async () => {
+    const res = await fetch('/api/postInquiry', { method: 'GET' });
+    const data = await res.json();
+    setInquiries(data.inquiries);
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-black">
         <Header />
@@ -61,15 +68,19 @@ export default function InquiriesPage() {
                 {responseMsg && (
                     <p className="mt-4 text-center text-green-600">{responseMsg}</p>
                 )}
-            </div>
-            <div className="h-20" ></div>
-            <div className="flex justify-center space-x-6">
-                <Link
-                href="/"
-                className="bg-black text-white dark:bg-white dark:text-black px-5 py-2 rounded-md text-base font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300"
+                
+                <button
+                    onClick={fetchInquiries}
+                    className="mt-6 w-full bg-gray-500 text-white p-2 rounded hover:bg-gray-600 transition"
                 >
-                Return Home
-                </Link>
+                    Load Inquiries
+                </button>
+
+                <ul className="mt-4 list-disc list-inside text-gray-200">
+                    {inquiries.map((inq, idx) => (
+                    <li key={idx}>{inq}</li>
+                    ))}
+                </ul>
             </div>
         </main>
         <div className="h-20" ></div>
