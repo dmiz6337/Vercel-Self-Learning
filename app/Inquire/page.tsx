@@ -68,7 +68,7 @@ export default function InquiriesPage() {
                 {responseMsg && (
                     <p className="mt-4 text-center text-green-600">{responseMsg}</p>
                 )}
-                
+
                 <button
                     onClick={fetchInquiries}
                     className="mt-6 w-full bg-gray-500 text-white p-2 rounded hover:bg-gray-600 transition"
@@ -76,11 +76,17 @@ export default function InquiriesPage() {
                     Load Inquiries
                 </button>
 
-                <ul className="mt-4 list-disc list-inside text-gray-200">
-                    {inquiries.map((inq, idx) => (
-                    <li key={idx}>{inq}</li>
-                    ))}
-                </ul>
+                <div className="mt-4 bg-black text-white p-4 rounded shadow">
+                    {inquiries.length === 0 ? (
+                        <p className="text-gray-400">No inquiries loaded yet.</p>
+                    ) : (
+                        <ul className="list-disc list-inside space-y-2">
+                            {inquiries.map((inq, idx) => (
+                                <li key={idx}>{inq}</li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
         </main>
         <div className="h-20" ></div>
