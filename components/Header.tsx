@@ -26,6 +26,38 @@ export default function Header() {
                 Contact
               </Link>
             </li>
+            <li>
+              <Link
+                href="/Events"
+                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
+                Events
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/Information"
+                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
+                Information
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/Inquire"
+                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
+                Inquire
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/Reviews"
+                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
+                Reviews
+              </Link>
+            </li>
           </ul>
           <ThemeSwitch />
         </nav>
