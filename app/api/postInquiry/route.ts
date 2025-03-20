@@ -1,5 +1,7 @@
 export const runtime = 'edge'; // Mark this as an edge function
 
+let inquiries: string[] = [];
+
 export async function POST(request: Request) {
   const body = await request.json();
   const { message } = body;
@@ -11,7 +13,7 @@ export async function POST(request: Request) {
     });
   }
 
-  // Example processing (e.g., save to DB, send email)
+  inquiries.push(message); // Save inquiry
   console.log('New inquiry:', message);
 
   return new Response(JSON.stringify({ message: 'Inquiry received successfully!' }), {
@@ -19,3 +21,11 @@ export async function POST(request: Request) {
     headers: { 'Content-Type': 'application/json' },
   });
 }
+
+export async function GET() {
+    // Return all inquiries
+    return new Response(JSON.stringify({ inquiries }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
