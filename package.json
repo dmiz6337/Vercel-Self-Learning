@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Nextjs Saas Starter Template",
   "scripts": {
+    "custom-build": "next build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
