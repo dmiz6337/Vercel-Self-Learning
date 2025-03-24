@@ -8,5 +8,11 @@
       "VERCEL_GIT_COMMIT_AUTHOR_LOGIN": "dmiz6337",
       "VERCEL": "1"
     },
-    "cleanUrls": true
+    "cleanUrls": true,
+
+    "buildCommand": "npm run custom-build",
+    "outputDirectory": "dist",
+    "rewrites": [
+      { "source": "/api/(.*)", "destination": "/api/$1" }
+    ]
   }
