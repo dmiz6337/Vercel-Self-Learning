@@ -24,7 +24,7 @@ const Information = () => {
                     </>
                     }
                     rightHalf={
-                    <Image src={"/products/phone.png"} alt="section-image" width={500} height={100} className="w-1/2 h-auto" />
+                    <Image src={"/statics/info_icon.png"} alt="section-image" width={300} height={300} className="w-1/2 h-auto" />
                     }
                 />
                 <Section
