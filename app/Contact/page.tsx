@@ -1,5 +1,5 @@
 import Header from "components/Header";
-import Features from "components/Features";
+import Contacts from "components/Contacts";
 import Section from "components/Section";
 import Footer from "components/Footer";
 import Image from "next/image";
@@ -26,7 +26,7 @@ const Contact = () => {
                     <Image src={"/products/phone.png"} alt="section-image" width={500} height={100} className="w-1/2 h-auto" />
                     }
                 />
-                <Features/>
+                <Contacts/>
             </main>
             <div className="h-20" ></div>
             <Footer />

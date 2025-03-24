@@ -51,7 +51,7 @@ const Contacts = () => {
         </div>
         <div className="mt-10">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, index) => (
+            {contacts.map((feature, index) => (
               <FeatureCard key={index} {...feature} />
             ))}
           </div>
