@@ -26,14 +26,7 @@ const Contact = () => {
                     <Image src={"/products/phone.png"} alt="section-image" width={500} height={100} className="w-1/2 h-auto" />
                     }
                 />
-                <div className="flex justify-center space-x-6">
-                    <Link
-                    href="/"
-                    className="bg-black text-white dark:bg-white dark:text-black px-5 py-2 rounded-md text-base font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300"
-                    >
-                    Return Home
-                    </Link>
-                </div>
+                <Features/>
             </main>
             <div className="h-20" ></div>
             <Footer />
