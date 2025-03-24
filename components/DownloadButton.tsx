@@ -4,7 +4,7 @@ import React from 'react';
 const DownloadButton = () => {
   return (
     <a
-      href="/example.pdf"  // Path to the document in the public folder
+      href="/statics/example.pdf"  // Path to the document in the public folder
       download="example.pdf"  // Optional: name the file when downloading
       className="btn-download"
     >
