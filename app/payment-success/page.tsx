@@ -8,6 +8,7 @@ export default function PaymentSuccess() {
                 <div style={{ textAlign: "center", marginTop: "50px" }}>
                     <h1>🎉 Payment Successful!</h1>
                     <p>Thank you for your payment. Your transaction has been completed.</p>
+                    <div className="h-20" ></div>
                     <div className="flex justify-center space-x-6">
                         <Link
                         href="/"
@@ -18,6 +19,7 @@ export default function PaymentSuccess() {
                     </div>
                 </div>
             </main>
+            <div className="h-20" ></div>
             <Footer />
         </div>
     );
