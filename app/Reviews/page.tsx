@@ -1,6 +1,8 @@
 "use client"; // Required for client-side state & API calls
 
 import { useState, useEffect } from "react";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
 type Review = {
   username: string;
@@ -62,6 +64,7 @@ export default function ReviewPage() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
+      <Header />
       <h1 className="text-2xl font-bold mb-4">Customer Reviews</h1>
 
       {/* Review Form */}
@@ -119,6 +122,7 @@ export default function ReviewPage() {
           <p className="text-gray-500">No reviews yet.</p>
         )}
       </div>
+      <Footer />
     </div>
   );
 }
