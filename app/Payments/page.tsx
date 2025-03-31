@@ -3,34 +3,33 @@ import { useState } from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
 
-export default function Payments() {
+export default function PaymentPage() {
+  const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const handlePayment = async () => {
     setLoading(true);
+    setError(null); // Reset previous errors
 
     try {
-      // Prepare data to send in the POST request
-      const paymentData = { amount: 1000 }; // Example amount, in cents (e.g., $10.00)
-
-      // Send the POST request to your API route
+      // Send the POST request to the API route with the amount entered by the user
       const response = await fetch("/api/pay", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(paymentData),
+        body: JSON.stringify({ amount }), // Send the amount to the API route
       });
 
-      const result = await response.json();
+      const data = await response.json();
 
-      if (response.ok && result.url) {
-        // Redirect to the Stripe homepage after payment initiation
-        window.location.href = result.url;  // Redirect to the Stripe homepage or a custom URL
+      if (response.ok && data.url) {
+        // Redirect the user to the URL provided in the API response (Stripe homepage)
+        window.location.href = data.url;
       } else {
         // Handle error if the response is not okay
-        setError(result.error || "Payment initiation failed.");
+        setError(data.error || "Payment initiation failed.");
       }
     } catch (error) {
       setError("An error occurred while processing the payment.");
@@ -44,6 +43,16 @@ export default function Payments() {
         <Header />
         <main>
             <h1>Payment Page</h1>
+            <div>
+                <label htmlFor="amount">Enter Amount:</label>
+                <input
+                type="number"
+                id="amount"
+                value={amount}
+                onChange={(e) => setAmount(Number(e.target.value))}
+                placeholder="Enter amount to pay"
+                />
+            </div>
             <button onClick={handlePayment} disabled={loading}>
                 {loading ? "Processing..." : "Pay Now"}
             </button>

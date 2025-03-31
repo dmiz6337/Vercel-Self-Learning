@@ -63,66 +63,71 @@ export default function ReviewPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <Header />
-      <h1 className="text-2xl font-bold mb-4">Customer Reviews</h1>
 
-      {/* Review Form */}
-      <form onSubmit={submitReview} className="mb-6 bg-gray-100 p-4 rounded-lg shadow-md">
-        <input
-          type="text"
-          placeholder="Your Name"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded mb-2"
-          required
-        />
+    <div className="flex flex-col min-h-screen bg-white dark:bg-black">
+        <Header />
+        <main>
+          <h1 className="text-2xl font-bold mb-4">Customer Reviews</h1>
 
-        <select
-          value={rating}
-          onChange={(e) => setRating(Number(e.target.value))}
-          className="w-full p-2 border border-gray-300 rounded mb-2"
-          required
-        >
-          {[5, 4, 3, 2, 1].map((r) => (
-            <option key={r} value={r}>
-              {r} Stars
-            </option>
-          ))}
-        </select>
+          {/* Review Form */}
+          <form onSubmit={submitReview} className="mb-6 bg-gray-100 p-4 rounded-lg shadow-md">
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded mb-2"
+              required
+            />
 
-        <textarea
-          placeholder="Write your review..."
-          value={reviewText}
-          onChange={(e) => setReviewText(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded mb-2"
-          required
-        />
+            <select
+              value={rating}
+              onChange={(e) => setRating(Number(e.target.value))}
+              className="w-full p-2 border border-gray-300 rounded mb-2"
+              required
+            >
+              {[5, 4, 3, 2, 1].map((r) => (
+                <option key={r} value={r}>
+                  {r} Stars
+                </option>
+              ))}
+            </select>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
-          disabled={loading}
-        >
-          {loading ? "Submitting..." : "Submit Review"}
-        </button>
-      </form>
+            <textarea
+              placeholder="Write your review..."
+              value={reviewText}
+              onChange={(e) => setReviewText(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded mb-2"
+              required
+            />
 
-      {/* Reviews List */}
-      <div>
-        {reviews.length > 0 ? (
-          reviews.map((review, index) => (
-            <div key={index} className="p-4 border-b border-gray-300">
-              <p className="font-bold">{review.username} ⭐ {review.rating}</p>
-              <p>{review.reviewText}</p>
-              <p className="text-sm text-gray-500">{new Date(review.createdAt).toDateString()}</p>
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-500">No reviews yet.</p>
-        )}
-      </div>
-      <Footer />
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+              disabled={loading}
+            >
+              {loading ? "Submitting..." : "Submit Review"}
+            </button>
+          </form>
+
+          {/* Reviews List */}
+          <div>
+            {reviews.length > 0 ? (
+              reviews.map((review, index) => (
+                <div key={index} className="p-4 border-b border-gray-300">
+                  <p className="font-bold">{review.username} ⭐ {review.rating}</p>
+                  <p>{review.reviewText}</p>
+                  <p className="text-sm text-gray-500">{new Date(review.createdAt).toDateString()}</p>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500">No reviews yet.</p>
+            )}
+          </div>
+        </main>
+        <div className="h-20" ></div>
+        <Footer />
     </div>
+    
   );
 }
