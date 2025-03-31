@@ -67,7 +67,7 @@ export default function ReviewPage() {
     <div className="flex flex-col min-h-screen bg-white dark:bg-black">
         <Header />
         <main>
-          <h1 className="text-2xl font-bold mb-4">Customer Reviews</h1>
+          <h1 className="text-2xl font-bold mb-4">User Reviews</h1>
 
           {/* Review Form */}
           <form onSubmit={submitReview} className="mb-6 bg-gray-100 p-4 rounded-lg shadow-md">
