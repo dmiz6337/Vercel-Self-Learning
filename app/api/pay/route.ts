@@ -15,10 +15,10 @@ export async function POST(req: Request) {
       );
     }
 
-    // If the amount is valid, redirect the user to the Stripe homepage
-    const redirectUrl = "https://stripe.com";  // Redirect to Stripe homepage
+    // Redirect the user to the payment success page
+    const redirectUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/payment-success`;
 
-    return NextResponse.json({ url: redirectUrl });
+    return NextResponse.redirect(redirectUrl);
 
   } catch (error: any) {
     console.error("Error during payment initiation:", error);
