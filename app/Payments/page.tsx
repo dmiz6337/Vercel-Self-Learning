@@ -3,49 +3,54 @@ import { useState } from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
 
-export default function PaymentPage() {
-    const [amount, setAmount] = useState("");
-    const [loading, setLoading] = useState(false);
+export default function Payments() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-    const handlePayment = async () => {
-        setLoading(true);
-        const response = await fetch("/api/pay", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount }),
-        });
+  const handlePayment = async () => {
+    setLoading(true);
 
-        if (response.ok) {
-            const { url } = await response.json();
-            window.location.href = url; // Redirect to Stripe Checkout
-        } else {
-            alert("Payment initiation failed. Please try again.");
-            setLoading(false);
-        }
-    };
+    try {
+      // Prepare data to send in the POST request
+      const paymentData = { amount: 1000 }; // Example amount, in cents (e.g., $10.00)
 
-    return (
-        <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-lg text-center">
-            <Header />
-            <h1 className="text-2xl font-bold">💳 Make a Payment</h1>
-            <p className="text-gray-600">Enter an amount to pay and proceed.</p>
+      // Send the POST request to your API route
+      const response = await fetch("/api/pay", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(paymentData),
+      });
 
-            <input
-                type="number"
-                placeholder="Enter amount ($)"
-                className="w-full mt-4 p-2 border rounded-md"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-            />
+      const result = await response.json();
 
-            <button
-                onClick={handlePayment}
-                disabled={loading || !amount}
-                className="w-full mt-4 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-gray-400"
-            >
+      if (response.ok && result.url) {
+        // Redirect to the Stripe homepage after payment initiation
+        window.location.href = result.url;  // Redirect to the Stripe homepage or a custom URL
+      } else {
+        // Handle error if the response is not okay
+        setError(result.error || "Payment initiation failed.");
+      }
+    } catch (error) {
+      setError("An error occurred while processing the payment.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen bg-white dark:bg-black">
+        <Header />
+        <main>
+            <h1>Payment Page</h1>
+            <button onClick={handlePayment} disabled={loading}>
                 {loading ? "Processing..." : "Pay Now"}
             </button>
-            <Footer />
-        </div>
-    );
+            {error && <p style={{ color: "red" }}>{error}</p>}
+        </main>
+        <div className="h-20" ></div>
+        <Footer />
+    </div>
+  );
 }
