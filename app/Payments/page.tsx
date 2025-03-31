@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Header from "components/Header";
 import Footer from "components/Footer";
 
@@ -7,6 +8,7 @@ export default function PaymentPage() {
   const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const handlePayment = async () => {
     setLoading(true);
@@ -22,12 +24,11 @@ export default function PaymentPage() {
         body: JSON.stringify({ amount }), // Send the amount to the API route
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.url) {
-        window.location.href = data.url;
+      if (response.ok) {
+        router.push("/payment-success");
       } else {
         // Handle error if the response is not okay
+        const data = await response.json();
         setError(data.error || "Payment initiation failed.");
       }
     } catch (error) {
