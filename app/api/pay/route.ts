@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     }
 
     // Redirect the user to the payment success page
-    const redirectUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/payment-success`;
+    const redirectUrl = '/payment-success';
 
     return NextResponse.redirect(redirectUrl);
 
