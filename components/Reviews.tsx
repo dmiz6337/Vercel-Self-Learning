@@ -15,35 +15,35 @@ interface ReviewsProps {
 const defaultReviews: ReviewData[] = [
   {
     rating: 5,
-    title: "Best app ever!",
+    title: "Unit 501 Leakage Maintenance",
     content:
-      "This app has been a game-changer for me! It's made tracking my daily activities so much easier. I love how intuitive and user-friendly it is.",
+      "Building management promptly came and addressed leakage in the 501 unit. Maintenance team quickly scheduled an appropriate time to work on the leak and executed efficiently.",
     author: "Jonas Aly",
-    designation: "Founder @ Company",
+    designation: "Unit 501 Tenant",
   },
   {
     rating: 5,
-    title: "Super helpful to stay organized",
+    title: "Payment Lodging Issue Resolved",
     content:
-      "I can't thank this app enough for helping me stay on top of my tasks. The reminders have saved me from missing important deadlines, and I'm much more organized now.",
+      "Payment lodgement portal was bugged last week. I filed an inquiry through the Strata Management Portal and the issue was resolved after a very short maintenance period.",
     author: "Mark Bures",
-    designation: "Businessman",
+    designation: "Family Accountant",
   },
   {
     rating: 5,
-    title: "Great app that saves time",
+    title: "Strata Management Portal",
     content:
-      "The app's integration with my other tools is seamless. I can easily check my progress and activities without having to switch between multiple platforms.",
+      "Strata Management Portal is an extremely convenient and effective means of providing maintenance requests, accessing the latest body corporate documents and completing payments on time.",
     author: "William Kolas",
-    designation: "Student",
+    designation: "Unit 104 Tenant",
   },
   {
     rating: 4,
-    title: "Seriously life changing app!",
+    title: "Body Corporate Contacts",
     content:
-      "The insights and reports have been eye-opening. I now have a better understanding of my habits and can make adjustments to improve my productivity.",
+      "The body corporate contact list was a super useful tooling for addressing a recent scheduling conflict for a body corporate board meeting. The provided information made it easy to reschedule and ensure that I was able to listen in on all the relevant meeting minutes.",
     author: "Andrew Chan",
-    designation: "Manager @ AB Company",
+    designation: "Strata Body Corporate Committee Member",
   },
 ];
 
@@ -52,7 +52,7 @@ const Reviews: React.FC<ReviewsProps> = ({ reviews = defaultReviews }) => {
     <section className="py-24 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-8 text-gray-900 dark:text-white">
-          A beautiful reviews section
+          Recent Projects
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8">
           {reviews.map((review, index) => (

@@ -22,6 +22,7 @@ export default function Page() {
       <div className="h-20" ></div>
         <main>
           <Features/> 
+          <div className="h-20" ></div>
           <Reviews />
         </main>
       <Footer />
