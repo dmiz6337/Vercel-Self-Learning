@@ -10,6 +10,17 @@
     },
     "cleanUrls": true,
     "buildCommand": "npm run custom-build",
+    "crons": [
+      {
+        "path": "/api/daily-task",
+        "schedule": "0 0 * * *"
+      }
+    ],
+    "edge_functions": {
+      "api/*": {
+        "regions": ["syd1"]
+      }
+    },
     "rewrites": [
       { "source": "/api/(.*)", "destination": "/api/$1" }
     ]
