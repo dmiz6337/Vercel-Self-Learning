@@ -16,7 +16,7 @@
         "schedule": "0 0 * * *"
       }
     ],
-    "edge_functions": {
+    "functions": {
       "api/*": {
         "regions": ["syd1"]
       }
