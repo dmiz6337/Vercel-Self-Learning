@@ -16,11 +16,7 @@
         "schedule": "0 0 * * *"
       }
     ],
-    "functions": {
-      "api/*": {
-        "regions": ["syd1"]
-      }
-    },
+    "regions": ["syd1"],
     "rewrites": [
       { "source": "/api/(.*)", "destination": "/api/$1" }
     ]
