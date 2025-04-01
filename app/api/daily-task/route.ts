@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const config = {
-  runtime: "nodejs",
-  regions: ["syd1"] // Specify deployment region
-};
+export const runtime = "nodejs"
+export const preferredRegion = ["syd1"]
 
 export async function GET(req: NextRequest) {
   console.log("Running daily task...");
