@@ -23,7 +23,7 @@ const Contact = () => {
                     </>
                     }
                     rightHalf={
-                    <Image src={"/products/phone.png"} alt="section-image" width={500} height={100} className="w-1/2 h-auto" />
+                    <Image src={"/statics/contact_icon.png"} alt="section-image" width={500} height={100} className="w-1/2 h-auto" />
                     }
                 />
                 <Contacts/>
