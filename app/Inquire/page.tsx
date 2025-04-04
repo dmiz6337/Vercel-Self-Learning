@@ -47,6 +47,8 @@ export default function InquiriesPage() {
     <div className="flex flex-col min-h-screen bg-white dark:bg-black">
         <Header />
         <main>
+            <div className="flex items-center bg-cover bg-center bg-no-repeat justify-center min-h-screen dark:bg-black"
+            style={{ backgroundImage: 'url("/statics/building.png")' }}>
             <div className="max-w-md mx-auto mt-10 p-4 bg-black text-white dark:bg-white dark:text-black px-5 py-2 rounded-md text-base font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300">
                 <h1 className="text-2xl font-bold mb-4">Post an Inquiry</h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -87,6 +89,7 @@ export default function InquiriesPage() {
                         </ul>
                     )}
                 </div>
+            </div>
             </div>
         </main>
         <div className="h-20" ></div>
