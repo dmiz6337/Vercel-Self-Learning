@@ -39,7 +39,10 @@ export default function PaymentPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-black dark:bg-black">
+    <div
+    className="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat dark:bg-black"
+    style={{ backgroundImage: 'url("/statics/building.png")' }}
+    >
         <Header />
         <main>
             <div className="flex items-center justify-center min-h-screen dark:bg-black">
