@@ -40,36 +40,38 @@ export default function PaymentPage() {
 
   return (
     <div
-    className="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat dark:bg-black"
-    style={{ backgroundImage: 'url("/statics/building.png")' }}
+    className="flex flex-col min-h-screen dark:bg-black"
     >
         <Header />
         <main>
-              <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md text-center">
-                  <h1 className="text-2xl text-black font-bold mb-4">Payment Page</h1>
-                  <p className="text-gray-600 mb-6">Enter the amount you want to pay</p>
+            <div className="flex items-center bg-cover bg-center bg-no-repeat justify-center min-h-screen dark:bg-black"
+            style={{ backgroundImage: 'url("/statics/building.png")' }}>
+                <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md text-center">
+                    <h1 className="text-2xl text-black font-bold mb-4">Payment Page</h1>
+                    <p className="text-gray-600 mb-6">Enter the amount you want to pay</p>
 
-                  <div className="mb-4">
-                      <input
-                          type="number"
-                          id="amount"
-                          value={amount}
-                          onChange={(e) => setAmount(Number(e.target.value))}
-                          placeholder="Enter amount"
-                          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                      />
-                  </div>
+                    <div className="mb-4">
+                        <input
+                            type="number"
+                            id="amount"
+                            value={amount}
+                            onChange={(e) => setAmount(Number(e.target.value))}
+                            placeholder="Enter amount"
+                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        />
+                    </div>
 
-                  <button
-                  onClick={handlePayment}
-                  disabled={loading}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400"
-                  >
-                  {loading ? "Processing..." : "Pay Now"}
-                  </button>
+                    <button
+                    onClick={handlePayment}
+                    disabled={loading}
+                    className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400"
+                    >
+                    {loading ? "Processing..." : "Pay Now"}
+                    </button>
 
-                  {error && <p className="text-red-500 mt-4">{error}</p>}
-              </div>
+                    {error && <p className="text-red-500 mt-4">{error}</p>}
+                </div>
+            </div>
         </main>
         <div className="h-20" ></div>
         <Footer />
