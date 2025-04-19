@@ -7,16 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Inquiry {
-  id      Int    @id(map: "playing_with_neon_pkey") @default(autoincrement())
-  name    String
-  inquiry String
+model User {
+  id        String    @id @default(cuid())
+  name      String?
+  email     String?   @unique
+  image     String?
+  inquiries Inquiry[] // One-to-many relation
 }
 
-model User {
-  id       String  @id @default(cuid())
-  email    String  @unique
-  password String
-  name     String?
+model Inquiry {
+  id        String   @id @default(cuid())
+  message   String
   createdAt DateTime @default(now())
+  userId    String
+  user      User?    @relation(fields: [userId], references: [id])
 }

@@ -1,31 +1,32 @@
-export const runtime = 'edge'; // Mark this as an edge function
+import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
-let inquiries: string[] = [];
+export async function POST(req: NextRequest) {
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  const userId = token?.sub ?? undefined;
 
-export async function POST(request: Request) {
-  const body = await request.json();
+  const body = await req.json();
   const { message } = body;
 
   if (!message || message.trim().length === 0) {
-    return new Response(JSON.stringify({ message: 'Inquiry cannot be empty.' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return NextResponse.json({ message: "Inquiry cannot be empty." }, { status: 400 });
   }
 
-  inquiries.push(message); // Save inquiry
-  console.log('New inquiry:', message);
-
-  return new Response(JSON.stringify({ message: 'Inquiry received successfully!' }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
+  const inquiry = await prisma.inquiry.create({
+    data: {
+      message,
+      userId,
+    },
   });
+
+  return NextResponse.json({ message: "Inquiry saved!", inquiry }, { status: 200 });
 }
 
 export async function GET() {
-    // Return all inquiries
-    return new Response(JSON.stringify({ inquiries }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
+  const inquiries = await prisma.inquiry.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+
+  return NextResponse.json({ inquiries }, { status: 200 });
+}

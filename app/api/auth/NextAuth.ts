@@ -1,37 +1,26 @@
-import NextAuth, { AuthOptions } from "next-auth";  // Import the AuthOptions type
-import CredentialsProvider from "next-auth/providers/credentials";
-import { compare } from "bcryptjs";
-import prisma from "@/lib/prisma";
+// app/api/auth/[...nextauth]/route.ts
 
-export const authOptions: AuthOptions = {
+import NextAuth from "next-auth";
+import GitHubProvider from "next-auth/providers/github";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prisma } from "@/lib/prisma";
+
+export const authOptions = {
   providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        const user = await prisma.user.findUnique({
-          where: { email: credentials?.email },
-        });
-
-        if (!user) throw new Error("No user found");
-
-        const isValid = await compare(credentials!.password, user.password);
-        if (!isValid) throw new Error("Invalid password");
-
-        return { id: user.id, email: user.email, name: user.name };
-      },
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
   ],
+  adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
   },
   pages: {
-    signIn: "/login",
+    signIn: "/login", // Your custom login page, if any
   },
-  secret: process.env.NEXTAUTH_SECRET,
 };
 
-export default NextAuth(authOptions);
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
