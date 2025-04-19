@@ -1,4 +1,3 @@
-// app/api/auth/register/route.ts
 import { PrismaClient } from "@prisma/client";
 import { hash } from "bcryptjs";
 
@@ -11,7 +10,6 @@ export async function POST(req: Request) {
     return new Response(JSON.stringify({ message: "Missing fields" }), { status: 400 });
   }
 
-  // Hash the password before saving
   const hashedPassword = await hash(password, 10);
 
   try {
@@ -24,6 +22,7 @@ export async function POST(req: Request) {
     });
     return new Response(JSON.stringify(user), { status: 201 });
   } catch (error) {
-    return new Response(JSON.stringify({ message: "Internal server error" }), { status: 500 });
+    console.error("Error creating user: ", error);
+    return new Response(JSON.stringify({ message: "Internal Server Error" }), { status: 500 });
   }
 }
