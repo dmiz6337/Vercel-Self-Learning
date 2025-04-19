@@ -3,7 +3,6 @@ import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 
 import "styles/globals.css";
-import './globals.css'
 import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
