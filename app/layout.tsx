@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { ReactNode } from "react";
 
 import "styles/globals.css";
+import './globals.css'
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "Strata Committee Owners Corporation Portal",
   description: "Strata Committee Owners Corporation Portal",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -21,9 +25,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-white dark:bg-black min-h-screen">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          {children}
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            {children}
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );
