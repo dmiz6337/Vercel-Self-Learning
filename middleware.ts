@@ -8,5 +8,5 @@ export default withAuth({
 });
 
 export const config = {
-    matcher: ["/((?!register|login|$).*)"], // excludes /, /login, /register
+    matcher: ["/((?!api|_next/static|_next/image|favicon.ico|$).*)"], // protect all routes except homepage and api routes
 };

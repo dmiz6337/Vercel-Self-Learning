@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import ThemeSwitch from "./ThemeSwitch";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Header() {
+  const { data: session } = useSession();
   return (
     <header className="sticky top-0 z-50 bg-white dark:bg-black shadow-sm dark:border-b dark:border-gray-800">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -59,7 +63,24 @@ export default function Header() {
               </Link>
             </li>
           </ul>
-          <ThemeSwitch />
+          <div className="flex items-center space-x-4">
+            {session?.user ? (
+              <button
+                onClick={() => signOut()}
+                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <button
+                onClick={() => signIn('github')}
+                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
+                Sign In
+              </button>
+            )}
+            <ThemeSwitch />
+          </div>
         </nav>
       </div>
     </header>

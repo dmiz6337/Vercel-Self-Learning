@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
-
+import Providers from "@/components/Providers";
 import "styles/globals.css";
-import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "Strata Committee Owners Corporation Portal",
@@ -24,11 +22,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body className="bg-white dark:bg-black min-h-screen">
-        <SessionProvider>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            {children}
-          </ThemeProvider>
-        </SessionProvider>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -1,11 +1,13 @@
-'use client'; // Needed for form interactivity in App Router
+'use client';
 import Header from "components/Header";
 import Footer from "components/Footer";
 import React from "react";
 import Link from 'next/link';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 export default function InquiriesPage() {
+  const { data: session } = useSession();
   const [message, setMessage] = useState('');
   const [responseMsg, setResponseMsg] = useState('');
   const [loading, setLoading] = useState(false);
