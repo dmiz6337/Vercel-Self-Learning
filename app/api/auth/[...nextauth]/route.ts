@@ -10,17 +10,31 @@ const authOptions: AuthOptions = {
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/github`
+        }
+      }
     })
   ],
   session: {
     strategy: "jwt",
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      console.log('Sign in callback:', { user, account, profile });
+      return true;
+    },
     async session({ session, token }) {
+      console.log('Session callback:', { session, token });
       if (session?.user) {
         session.user.id = token.sub!;
       }
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      console.log('Redirect callback:', { url, baseUrl });
+      return url;
     },
   },
   debug: process.env.NODE_ENV === 'development',
