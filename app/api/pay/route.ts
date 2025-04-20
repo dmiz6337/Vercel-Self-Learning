@@ -16,9 +16,10 @@ export async function POST(req: Request) {
     }
 
     // Redirect the user to the payment success page
-    const redirectUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/payment-success`;
+    const baseUrl = new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://strata-management-vercel.vercel.app');
+    const redirectUrl = new URL('/payment-success', baseUrl);
 
-    return NextResponse.redirect(redirectUrl, 303);
+    return NextResponse.redirect(redirectUrl.toString(), 303);
 
   } catch (error: any) {
     console.error("Error during payment initiation:", error);
