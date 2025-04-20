@@ -61,8 +61,8 @@ const authOptions: AuthOptions = {
       }
       return session;
     },
-  },
-});
+  }
+};
 
 const handler = NextAuth(authOptions);
 
