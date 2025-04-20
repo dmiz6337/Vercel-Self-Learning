@@ -14,13 +14,12 @@ export default function Page() {
     <div className="flex flex-col min-h-screen bg-white dark:bg-black">
       <Header />
       <div className="relative w-screen h-screen">
-        <Image
-          src="/statics/banner.jpeg"
-          alt="Banner"
-          fill
-          priority
-          className="object-cover"
-          quality={100}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: 'url(https://strata-management-vercel.vercel.app/statics/banner.jpeg)',
+            zIndex: 0
+          }}
         />
         <div className="relative z-10">
           <Hero />
