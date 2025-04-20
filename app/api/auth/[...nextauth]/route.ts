@@ -8,37 +8,51 @@ const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      authorization: {
-        params: {
-          redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/github`
-        }
-      }
+      clientId: process.env.GITHUB_CLIENT_ID ?? '',
+      clientSecret: process.env.GITHUB_CLIENT_SECRET ?? '',
     })
   ],
-  session: {
-    strategy: "jwt",
+  pages: {
+    signIn: '/api/auth/signin',
+    signOut: '/api/auth/signout',
+    error: '/api/auth/error',
+    verifyRequest: '/api/auth/verify-request',
+    newUser: '/api/auth/new-user'
   },
   callbacks: {
-    async signIn({ user, account, profile }) {
-      console.log('Sign in callback:', { user, account, profile });
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log('Sign in attempt:', { user, account, profile });
       return true;
     },
-    async session({ session, token }) {
-      console.log('Session callback:', { session, token });
+    async redirect({ url, baseUrl }) {
+      console.log('Redirect attempt:', { url, baseUrl });
+      if (url.startsWith(baseUrl)) return url;
+      else if (url.startsWith('/')) return new URL(url, baseUrl).toString();
+      return baseUrl;
+    },
+    async session({ session, user, token }) {
+      console.log('Session callback:', { session, user, token });
       if (session?.user) {
         session.user.id = token.sub!;
       }
       return session;
     },
-    async redirect({ url, baseUrl }) {
-      console.log('Redirect callback:', { url, baseUrl });
-      return url;
-    },
+    async jwt({ token, user, account, profile }) {
+      console.log('JWT callback:', { token, user, account, profile });
+      return token;
+    }
   },
-  debug: process.env.NODE_ENV === 'development',
-  secret: process.env.NEXTAUTH_SECRET
+  events: {
+    async signIn(message) { console.log('User signed in:', message) },
+    async signOut(message) { console.log('User signed out:', message) }
+  },
+  debug: true,
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60 // 24 hours
+  }
 };
 
 const handler = NextAuth(authOptions);
