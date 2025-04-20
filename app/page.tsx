@@ -13,11 +13,18 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-black">
       <Header />
-      <div
-          className="w-screen h-screen bg-cover bg-center bg-top"
-          style={{ backgroundImage: "url('/statics/banner.jpeg')" }}
-        >
-        <Hero />
+      <div className="relative w-screen h-screen">
+        <Image
+          src="/statics/banner.jpeg"
+          alt="Banner"
+          fill
+          priority
+          className="object-cover"
+          quality={100}
+        />
+        <div className="relative z-10">
+          <Hero />
+        </div>
       </div>
       <div className="h-20" ></div>
         <main>
