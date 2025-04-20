@@ -2,7 +2,7 @@ import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export async function POST(req: NextRequest) {
+export const POST = async (req: NextRequest) => {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const userId = token?.sub ?? undefined;
 
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ message: "Inquiry saved!", inquiry }, { status: 200 });
 }
 
-export async function GET() {
+export const GET = async () => {
   const inquiries = await prisma.inquiry.findMany({
     orderBy: { createdAt: "desc" },
   });
