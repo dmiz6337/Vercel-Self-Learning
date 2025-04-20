@@ -1,11 +1,11 @@
-import NextAuth, { Session } from "next-auth";
+import NextAuth, { Session, AuthOptions, SessionStrategy } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import { compare } from "bcryptjs";
 
-const handler = NextAuth({
+const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GitHubProvider({
@@ -49,7 +49,7 @@ const handler = NextAuth({
     })
   ],
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as SessionStrategy,
   },
   pages: {
     signIn: "/auth/signin",
@@ -64,5 +64,7 @@ const handler = NextAuth({
   },
 });
 
-export const GET = handler;
-export const POST = handler;
+const handler = NextAuth(authOptions);
+
+export const GET = async (req: Request) => handler(req);
+export const POST = async (req: Request) => handler(req);
