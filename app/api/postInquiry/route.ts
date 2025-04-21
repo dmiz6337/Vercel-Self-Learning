@@ -3,30 +3,54 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export const POST = async (req: NextRequest) => {
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  const userId = token?.sub ?? undefined;
+  try {
+    // Check authentication
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    if (!token?.sub) {
+      return NextResponse.json({ message: "You must be logged in to submit an inquiry." }, { status: 401 });
+    }
 
-  const body = await req.json();
-  const { message } = body;
+    // Parse request body
+    const body = await req.json();
+    const { message } = body;
 
-  if (!message || message.trim().length === 0) {
-    return NextResponse.json({ message: "Inquiry cannot be empty." }, { status: 400 });
+    // Validate message
+    if (!message || message.trim().length === 0) {
+      return NextResponse.json({ message: "Inquiry cannot be empty." }, { status: 400 });
+    }
+
+    // Create inquiry
+    const inquiry = await prisma.inquiry.create({
+      data: {
+        message: message.trim(),
+        userId: token.sub,
+      },
+    });
+
+    return NextResponse.json({ message: "Inquiry saved!", inquiry }, { status: 200 });
+  } catch (error) {
+    console.error('Error posting inquiry:', error);
+    return NextResponse.json({ message: "Failed to save inquiry. Please try again." }, { status: 500 });
   }
-
-  const inquiry = await prisma.inquiry.create({
-    data: {
-      message,
-      userId,
-    },
-  });
-
-  return NextResponse.json({ message: "Inquiry saved!", inquiry }, { status: 200 });
 }
 
 export const GET = async () => {
-  const inquiries = await prisma.inquiry.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+  try {
+    const inquiries = await prisma.inquiry.findMany({
+      orderBy: { createdAt: "desc" },
+      include: {
+        user: {
+          select: {
+            name: true,
+            image: true
+          }
+        }
+      }
+    });
 
-  return NextResponse.json({ inquiries }, { status: 200 });
+    return NextResponse.json({ inquiries }, { status: 200 });
+  } catch (error) {
+    console.error('Error fetching inquiries:', error);
+    return NextResponse.json({ message: "Failed to fetch inquiries." }, { status: 500 });
+  }
 }
