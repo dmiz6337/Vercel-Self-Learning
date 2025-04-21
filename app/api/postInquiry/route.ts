@@ -63,3 +63,19 @@ export const GET = async () => {
     }, { status: 500 });
   }
 }
+
+export const DELETE = async (req: NextRequest) => {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+    if (!id) {
+      return NextResponse.json({ message: 'Missing inquiry id.' }, { status: 400 });
+    }
+    await prisma.inquiry.delete({ where: { id } });
+    return NextResponse.json({ message: 'Inquiry resolved and deleted.' }, { status: 200 });
+  } catch (error) {
+    console.error('Error deleting inquiry:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({ message: 'Failed to delete inquiry.', error: errorMessage }, { status: 500 });
+  }
+};
