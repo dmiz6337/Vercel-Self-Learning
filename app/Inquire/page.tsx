@@ -93,16 +93,16 @@ const [inquiries, setInquiries] = useState<Inquiry[]>([]);
                     {inquiries.length === 0 ? (
                         <p className="text-gray-400">No inquiries loaded yet.</p>
                     ) : (
-                        <ul className="list-disc list-inside space-y-2">
+                        <div className="space-y-2">
   {inquiries.map((inq) => (
-    <li key={inq.id} className="mb-2">
+    <div key={inq.id} className="mb-2">
       <div>
         <strong>{inq.user?.name || "Anonymous"}:</strong> {inq.message}
       </div>
       <div className="text-xs text-gray-400">{new Date(inq.createdAt).toLocaleString()}</div>
-    </li>
+    </div>
   ))}
-</ul>
+</div>
                     )}
                 </div>
             </div>
