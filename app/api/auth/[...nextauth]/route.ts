@@ -11,6 +11,7 @@ const authOptions: AuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET ?? '',
     })
   ],
+  adapter: PrismaAdapter(prisma),
   callbacks: {
     async session({ session, token }) {
       if (session?.user) {
