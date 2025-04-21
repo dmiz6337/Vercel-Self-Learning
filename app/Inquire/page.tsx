@@ -7,6 +7,25 @@ import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 
 export default function InquiriesPage() {
+
+  // ...existing hooks and types...
+
+  const handleResolve = async (id: string) => {
+    try {
+      const res = await fetch(`/api/postInquiry?id=${id}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        setInquiries((prev) => prev.filter((inq) => inq.id !== id));
+      } else {
+        const data = await res.json();
+        alert(data.message || 'Failed to resolve inquiry.');
+      }
+    } catch (err) {
+      alert('Failed to resolve inquiry.');
+    }
+  };
+
   const { data: session } = useSession();
   const [message, setMessage] = useState('');
   const [responseMsg, setResponseMsg] = useState('');
@@ -95,13 +114,19 @@ const [inquiries, setInquiries] = useState<Inquiry[]>([]);
                     ) : (
                         <div className="space-y-2">
   {inquiries.map((inq) => (
-    <div key={inq.id} className="mb-2">
-      <div>
-        <strong>{inq.user?.name || "Anonymous"}:</strong> {inq.message}
-      </div>
+  <div key={inq.id} className="mb-2 flex items-center justify-between">
+    <div>
+      <strong>{inq.user?.name || "Anonymous"}:</strong> {inq.message}
       <div className="text-xs text-gray-400">{new Date(inq.createdAt).toLocaleString()}</div>
     </div>
-  ))}
+    <button
+      onClick={() => handleResolve(inq.id)}
+      className="ml-4 bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs"
+    >
+      Resolve
+    </button>
+  </div>
+))}
 </div>
                     )}
                 </div>
