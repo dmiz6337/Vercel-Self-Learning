@@ -30,7 +30,12 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ message: "Inquiry saved!", inquiry }, { status: 200 });
   } catch (error) {
     console.error('Error posting inquiry:', error);
-    return NextResponse.json({ message: "Failed to save inquiry. Please try again." }, { status: 500 });
+    // If it's a Prisma error, it will have a message property
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({ 
+      message: "Failed to save inquiry. Please try again.", 
+      error: errorMessage 
+    }, { status: 500 });
   }
 }
 
