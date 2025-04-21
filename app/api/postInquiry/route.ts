@@ -56,6 +56,10 @@ export const GET = async () => {
     return NextResponse.json({ inquiries }, { status: 200 });
   } catch (error) {
     console.error('Error fetching inquiries:', error);
-    return NextResponse.json({ message: "Failed to fetch inquiries." }, { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({ 
+      message: "Failed to fetch inquiries.", 
+      error: errorMessage 
+    }, { status: 500 });
   }
 }
