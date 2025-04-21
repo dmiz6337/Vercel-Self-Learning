@@ -11,7 +11,16 @@ export default function InquiriesPage() {
   const [message, setMessage] = useState('');
   const [responseMsg, setResponseMsg] = useState('');
   const [loading, setLoading] = useState(false);
-  const [inquiries, setInquiries] = useState<string[]>([]);
+  type Inquiry = {
+  id: string;
+  message: string;
+  createdAt: string;
+  user?: {
+    name?: string | null;
+    image?: string | null;
+  };
+};
+const [inquiries, setInquiries] = useState<Inquiry[]>([]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,10 +94,15 @@ export default function InquiriesPage() {
                         <p className="text-gray-400">No inquiries loaded yet.</p>
                     ) : (
                         <ul className="list-disc list-inside space-y-2">
-                            {inquiries.map((inq, idx) => (
-                                <li key={idx}>{inq}</li>
-                            ))}
-                        </ul>
+  {inquiries.map((inq) => (
+    <li key={inq.id} className="mb-2">
+      <div>
+        <strong>{inq.user?.name || "Anonymous"}:</strong> {inq.message}
+      </div>
+      <div className="text-xs text-gray-400">{new Date(inq.createdAt).toLocaleString()}</div>
+    </li>
+  ))}
+</ul>
                     )}
                 </div>
             </div>
