@@ -19,7 +19,6 @@ export async function POST() {
   }
 }
 
-// Vercel will call this endpoint on schedule, so GET can also be supported if needed
 export async function GET() {
   return NextResponse.json({ status: 'ok' });
 }
