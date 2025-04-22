@@ -71,3 +71,11 @@ model Inquiry {
   userId    String
   user      User?    @relation(fields: [userId], references: [id])
 }
+
+model Payment {
+  id          String   @id @default(cuid())
+  description String
+  amount      Float
+  createdAt   DateTime @default(now())
+  // Optionally, add userId or status fields
+}

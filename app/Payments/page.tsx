@@ -1,37 +1,49 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "components/Header";
 import Footer from "components/Footer";
 
+interface Payment {
+  id: string;
+  description: string;
+  amount: number;
+  createdAt: string;
+}
+
 export default function PaymentPage() {
-  const [amount, setAmount] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [payments, setPayments] = useState<Payment[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const handlePayment = async () => {
-    setLoading(true);
-    setError(null); // Reset previous errors
-
-    try {
-      // Send the POST request to the API route with the amount entered by the user
-      const response = await fetch("/api/pay", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ amount }), // Send the amount to the API route
+  useEffect(() => {
+    fetch("/api/payments")
+      .then((res) => res.json())
+      .then((data) => {
+        setPayments(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError("Failed to fetch payments.");
+        setLoading(false);
       });
+  }, []);
 
+  const handlePayNow = async (id: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(`/api/payments/${id}`, {
+        method: "DELETE",
+      });
       if (response.ok) {
+        setPayments((prev) => prev.filter((p) => p.id !== id));
         router.push("/payment-success");
       } else {
-        // Handle error if the response is not okay
-        const data = await response.json();
-        setError(data.error || "Payment initiation failed.");
+        setError("Failed to process payment.");
       }
-    } catch (error) {
+    } catch (err) {
       setError("An error occurred while processing the payment.");
     } finally {
       setLoading(false);
@@ -39,42 +51,50 @@ export default function PaymentPage() {
   };
 
   return (
-    <div
-    className="flex flex-col min-h-screen dark:bg-black"
-    >
-        <Header />
-        <main>
-            <div className="flex items-center bg-cover bg-center bg-no-repeat justify-center min-h-screen dark:bg-black"
-            style={{ backgroundImage: 'url("/statics/building.png")' }}>
-                <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md text-center">
-                    <h1 className="text-2xl text-black font-bold mb-4">Payment Page</h1>
-                    <p className="text-gray-600 mb-6">Enter the amount you want to pay</p>
-
-                    <div className="mb-4">
-                        <input
-                            type="number"
-                            id="amount"
-                            value={amount}
-                            onChange={(e) => setAmount(Number(e.target.value))}
-                            placeholder="Enter amount"
-                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        />
-                    </div>
-
-                    <button
-                    onClick={handlePayment}
-                    disabled={loading}
-                    className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400"
-                    >
-                    {loading ? "Processing..." : "Pay Now"}
-                    </button>
-
-                    {error && <p className="text-red-500 mt-4">{error}</p>}
-                </div>
-            </div>
-        </main>
-        <div className="h-20" ></div>
-        <Footer />
+    <div className="flex flex-col min-h-screen dark:bg-black">
+      <Header />
+      <main>
+        <div className="flex items-center bg-cover bg-center bg-no-repeat justify-center min-h-screen dark:bg-black"
+          style={{ backgroundImage: 'url("/statics/building.png")' }}>
+          <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl text-center dark:bg-gray-900">
+            <h1 className="text-2xl text-black dark:text-white font-bold mb-4">Outstanding Payments</h1>
+            {error && <p className="text-red-500 mb-2">{error}</p>}
+            {loading ? (
+              <p className="text-gray-600 dark:text-gray-300">Loading...</p>
+            ) : payments.length === 0 ? (
+              <p className="text-gray-600 dark:text-gray-300">No outstanding payments.</p>
+            ) : (
+              <table className="min-w-full border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900">
+                <thead>
+                  <tr>
+                    <th className="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">Description</th>
+                    <th className="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">Amount</th>
+                    <th className="py-2 px-4 border-b border-gray-200 dark:border-gray-700"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {payments.map((payment) => (
+                    <tr key={payment.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      <td className="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">{payment.description}</td>
+                      <td className="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">${payment.amount.toFixed(2)}</td>
+                      <td className="py-2 px-4 border-b border-gray-200 dark:border-gray-700">
+                        <button
+                          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+                          onClick={() => handlePayNow(payment.id)}
+                          disabled={loading}
+                        >
+                          Pay Now
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 }
