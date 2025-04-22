@@ -12,10 +12,6 @@
     "buildCommand": "npm run custom-build",
     "crons": [
       {
-        "path": "/api/daily-task",
-        "schedule": "0 0 * * *"
-      },
-      {
         "path": "/api/cron/weekly-payment",
         "schedule": "* * * * *"
       }
