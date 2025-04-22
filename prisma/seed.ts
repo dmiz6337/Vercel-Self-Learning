@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.UnitOwner.createMany({
+  await prisma.unitOwner.createMany({
     data: [
       {
         name: 'Alice Johnson',
