@@ -57,7 +57,7 @@ export default function PaymentPage() {
     };
   }, []);
 
-  const [success, setSuccess] = useState(false);
+
 
   const handlePayNow = async (id: string) => {
     setLoading(true);
@@ -67,8 +67,8 @@ export default function PaymentPage() {
         method: "DELETE",
       });
       if (response.ok) {
-        setPayments((prev) => prev.filter((p) => p.id !== id));
-        setSuccess(true);
+        // Redirect to the payment success page
+        window.location.href = "/payment-success";
       } else {
         setError("Failed to process payment.");
       }
@@ -93,12 +93,7 @@ export default function PaymentPage() {
       });
   };
 
-  // Check if ?success=1 is in the URL
-  let paymentSuccess = false;
-  if (typeof window !== "undefined") {
-    const searchParams = new URLSearchParams(window.location.search);
-    paymentSuccess = searchParams.get("success") === "1";
-  }
+
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-black">
@@ -108,11 +103,7 @@ export default function PaymentPage() {
           style={{ backgroundImage: 'url("/statics/building.png")' }}>
           <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl text-center dark:bg-gray-900">
             <h1 className="text-2xl text-black dark:text-white font-bold mb-4">Outstanding Payments</h1>
-            {success && (
-              <div className="bg-green-100 text-green-700 p-2 rounded mb-4">
-                Payment successful!
-              </div>
-            )}
+
 
             {error && <p className="text-red-500 mb-2">{error}</p>}
             {loading ? (
