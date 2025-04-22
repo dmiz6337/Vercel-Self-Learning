@@ -13,7 +13,7 @@ export async function POST() {
         createdAt: new Date(),
       },
     });
-    return NextResponse.json({ success: true, message: 'Weekly payment added!' });
+    return NextResponse.json({ success: true, message: 'Daily payment added!' });
   } catch (err) {
     return NextResponse.json({ success: false, error: String(err) }, { status: 500 });
   }
