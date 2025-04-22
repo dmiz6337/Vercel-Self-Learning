@@ -42,8 +42,18 @@ export default function PaymentPage() {
       }
     };
     window.addEventListener("pageshow", handlePageShow);
+
+    // Listen for visibilitychange (tab switch, client-side navigation)
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        fetchPayments();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
     return () => {
       window.removeEventListener("pageshow", handlePageShow);
+      document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
 
