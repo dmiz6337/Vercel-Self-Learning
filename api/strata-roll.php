@@ -1,5 +1,4 @@
 <?php
-// Example data for the strata roll (replace with DB connection if needed)
 $strataRoll = [
     [
         'unit' => 'Unit 101',
