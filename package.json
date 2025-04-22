@@ -37,7 +37,7 @@
     "typescript": "^5.8.3"
   },
   "prisma": {
-  "seed": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' prisma/seed.ts"
-},
+    "seed": "ts-node prisma/seed.ts"
+  },
   "type": "module"
 }
