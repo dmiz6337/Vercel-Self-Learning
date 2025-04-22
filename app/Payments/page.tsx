@@ -47,6 +47,8 @@ export default function PaymentPage() {
     };
   }, []);
 
+  const [success, setSuccess] = useState(false);
+
   const handlePayNow = async (id: string) => {
     setLoading(true);
     setError(null);
@@ -55,8 +57,8 @@ export default function PaymentPage() {
         method: "DELETE",
       });
       if (response.ok) {
-        // Force a hard reload to ensure fresh data
-        window.location.href = "/Payments?success=1";
+        setPayments((prev) => prev.filter((p) => p.id !== id));
+        setSuccess(true);
       } else {
         setError("Failed to process payment.");
       }
@@ -96,7 +98,7 @@ export default function PaymentPage() {
           style={{ backgroundImage: 'url("/statics/building.png")' }}>
           <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl text-center dark:bg-gray-900">
             <h1 className="text-2xl text-black dark:text-white font-bold mb-4">Outstanding Payments</h1>
-            {paymentSuccess && (
+            {success && (
               <div className="bg-green-100 text-green-700 p-2 rounded mb-4">
                 Payment successful!
               </div>
