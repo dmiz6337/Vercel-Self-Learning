@@ -46,6 +46,16 @@ model User {
   inquiries     Inquiry[] // One-to-many relation
 }
 
+model UnitOwner {
+  id               String   @id @default(cuid())
+  name             String
+  email            String
+  phone            String?
+  unitNumber       String
+  entitlement      Float
+  createdAt        DateTime @default(now())
+}
+
 model VerificationToken {
   identifier String
   token      String   @unique
