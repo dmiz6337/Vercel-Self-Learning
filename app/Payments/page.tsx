@@ -17,17 +17,34 @@ export default function PaymentPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
+  // Fetch payments on mount and when page is restored from bfcache (browser back/forward)
   useEffect(() => {
-    fetch("/api/payments")
-      .then((res) => res.json())
-      .then((data) => {
-        setPayments(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError("Failed to fetch payments.");
-        setLoading(false);
-      });
+    const fetchPayments = () => {
+      setLoading(true);
+      fetch("/api/payments")
+        .then((res) => res.json())
+        .then((data) => {
+          setPayments(data);
+          setLoading(false);
+        })
+        .catch(() => {
+          setError("Failed to fetch payments.");
+          setLoading(false);
+        });
+    };
+
+    fetchPayments();
+
+    // Listen for pageshow event to handle bfcache restores
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        fetchPayments();
+      }
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => {
+      window.removeEventListener("pageshow", handlePageShow);
+    };
   }, []);
 
   const handlePayNow = async (id: string) => {
@@ -39,6 +56,11 @@ export default function PaymentPage() {
       });
       if (response.ok) {
         setPayments((prev) => prev.filter((p) => p.id !== id));
+        if (typeof router.refresh === "function") {
+          router.refresh(); // Next.js 13+ App Router
+        } else {
+          window.location.reload(); // fallback for older Next.js
+        }
         router.push("/payment-success");
       } else {
         setError("Failed to process payment.");
@@ -50,6 +72,20 @@ export default function PaymentPage() {
     }
   };
 
+  const handleRefresh = () => {
+    setLoading(true);
+    fetch("/api/payments")
+      .then((res) => res.json())
+      .then((data) => {
+        setPayments(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError("Failed to fetch payments.");
+        setLoading(false);
+      });
+  };
+
   return (
     <div className="flex flex-col min-h-screen dark:bg-black">
       <Header />
@@ -58,6 +94,7 @@ export default function PaymentPage() {
           style={{ backgroundImage: 'url("/statics/building.png")' }}>
           <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl text-center dark:bg-gray-900">
             <h1 className="text-2xl text-black dark:text-white font-bold mb-4">Outstanding Payments</h1>
+
             {error && <p className="text-red-500 mb-2">{error}</p>}
             {loading ? (
               <p className="text-gray-600 dark:text-gray-300">Loading...</p>

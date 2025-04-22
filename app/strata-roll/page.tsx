@@ -16,13 +16,30 @@ export default function StrataRollPage() {
   const [owners, setOwners] = useState<UnitOwner[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch owners on mount and when page is restored from bfcache (browser back/forward)
   useEffect(() => {
-    fetch("/api/strata-roll")
-      .then((res) => res.json())
-      .then((data) => {
-        setOwners(data);
-        setLoading(false);
-      });
+    const fetchOwners = () => {
+      setLoading(true);
+      fetch("/api/strata-roll")
+        .then((res) => res.json())
+        .then((data) => {
+          setOwners(data);
+          setLoading(false);
+        });
+    };
+
+    fetchOwners();
+
+    // Listen for pageshow event to handle bfcache restores
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        fetchOwners();
+      }
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => {
+      window.removeEventListener("pageshow", handlePageShow);
+    };
   }, []);
 
   return (
