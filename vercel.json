@@ -12,8 +12,8 @@
     "buildCommand": "npm run custom-build",
     "crons": [
       {
-        "path": "/api/cron/weekly-payment",
-        "schedule": "* * * * *"
+        "path": "/api/cron/daily-payment",
+        "schedule": "0 0 * * *"
       }
     ],
     "regions": ["syd1"],

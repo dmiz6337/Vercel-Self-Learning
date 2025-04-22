@@ -3,12 +3,12 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// POST /api/cron/weekly-payment - run by Vercel cron
+// POST /api/cron/daily-payment - run by Vercel cron
 export async function POST() {
   try {
     await prisma.payment.create({
       data: {
-        description: 'Automated weekly payment',
+        description: 'Automated daily payment',
         amount: 100, // Change as needed
         createdAt: new Date(),
       },
