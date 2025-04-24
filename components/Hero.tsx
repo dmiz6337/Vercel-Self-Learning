@@ -11,7 +11,7 @@ export default function Hero() {
       </p>
       <div className="flex justify-center space-x-6">
         <Link
-          href="/Information/page"
+          href="/api/information-page.php"
           className="bg-black text-white dark:bg-white dark:text-black px-5 py-2 rounded-md text-base font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300"
         >
           Learn More

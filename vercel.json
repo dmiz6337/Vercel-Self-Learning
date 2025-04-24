@@ -18,12 +18,11 @@
     ],
     "regions": ["syd1"],
     "rewrites": [
-      { "source": "/api/(.*)", "destination": "/api/$1" },
-      { "source": "/Information/page", "destination": "/api/information-page.php" }
+      { "source": "/api/(.*)", "destination": "/api/$1" }
     ],
     "functions": {
       "api/information-page.php": {
-        "runtime": "vercel-php@0.6.1"
+        "runtime": "vercel-php@0.7.1"
       }
     }
   }
