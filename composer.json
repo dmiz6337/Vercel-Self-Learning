@@ -1,5 +1,7 @@
 {
   "require": {
-    "vercel/php": "^0.6.1"
-  }
+    "vercel/php": "^0.7.1"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
