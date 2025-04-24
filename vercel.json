@@ -19,8 +19,6 @@
     "regions": ["syd1"],
     "rewrites": [
       { "source": "/api/(.*)", "destination": "/api/$1" }
-    ],"routes": [
-      { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "functions": {
       "api/index.php": {
