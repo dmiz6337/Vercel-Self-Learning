@@ -17,17 +17,14 @@
       }
     ],
     "rewrites": [
-      { "source": "/api/(.*)", "destination": "/api/$1" },
-      { "source": "/(.*)", "destination": "/$1" }
-    ],
-    "functions": {
-    "api/index.php": {
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/(.*)", "destination": "/$1" }
+  ],
+  "functions": {
+    "api/*.php": {
       "runtime": "vercel-php@0.7.3",
       "excludeFiles": "**",
       "includeFiles": "api/*.php statics/**"
     }
-  },
-  "routes": [
-    { "src": "/(.*)", "dest": "/api/index.php" }
-  ]
+  }
 }
