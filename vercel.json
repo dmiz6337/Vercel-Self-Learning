@@ -17,11 +17,12 @@
       }
     ],
     "rewrites": [
-      { "source": "/api/(.*)", "destination": "/api/$1" }
+      { "source": "/api/(.*)", "destination": "/api/$1" },
+      { "source": "/(.*)", "destination": "/$1" }
     ],
     "functions": {
-    "api/*.php": {
-      "runtime": "vercel-php@0.7.3"
+      "api/*.php": {
+        "runtime": "vercel-php@0.7.3"
+      }
     }
-  }
-  }
+}

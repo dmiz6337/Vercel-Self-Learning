@@ -1,5 +1,5 @@
-# Exclude local development and unnecessary files from Vercel deployment
 node_modules/
+.next/
 .git/
 .DS_Store
 uploads/
