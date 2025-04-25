@@ -23,7 +23,7 @@
     "functions": {
       "api/*.php": {
         "runtime": "vercel-php@0.7.3",
-      "excludeFiles": "node_modules/** .next/** uploads/** tests/** coverage/** .env *.log"
+      "excludeFiles": "**/* !api/*.php"
       }
     }
 }
