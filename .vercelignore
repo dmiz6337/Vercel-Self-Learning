@@ -1,0 +1,11 @@
+# Exclude local development and unnecessary files from Vercel deployment
+node_modules/
+.git/
+.DS_Store
+uploads/
+prisma/
+tests/
+coverage/
+.env
+*.log
+*.sqlite
