@@ -1,5 +1,9 @@
 <?php 
-// If you have common header/footer PHP includes, you can replace the HTML below with include statements.
+$apiUrl = $_ENV['API_URL'] ?? 'https://strata-management-vercel.vercel.app';
+$response = file_get_contents($apiUrl . '/api');
+
+// Example: render result into HTML
+$data = json_decode($response, true);
 ?>
 <!DOCTYPE html>
 <html lang="en">
