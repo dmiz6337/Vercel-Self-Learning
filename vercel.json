@@ -23,8 +23,8 @@
     "functions": {
       "api/*.php": {
         "runtime": "vercel-php@0.7.3",
-        "excludeFiles": "**/*",
-        "includeFiles": "api/*.php"
+        "excludeFiles": "node_modules/** .next/** .git/** .DS_Store uploads/** tests/** coverage/** .env *.log package.json package-lock.json app/** pages/** components/** public/** prisma/** types/** lib/** !api/*.php !statics/**",
+        "includeFiles": "api/*.php statics/**"
       }
     }
 }
