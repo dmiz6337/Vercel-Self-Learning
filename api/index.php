@@ -47,8 +47,8 @@
         <!-- Section 2 -->
         <div class="section">
             <div class="section-left">
-                <h2 class="title">2024 Financial Report</h2>
-                <p class="desc">Financial reports for the financial year ending in 2024.</p>
+                <h2 class="title">Financial Reports</h2>
+                <p class="desc">Download the latest financial reports for your building.</p>
             </div>
             <div class="section-right">
                 <a href="/statics/2024-financial-report.pdf" class="download-btn" download>Download</a>
@@ -69,7 +69,6 @@
             <a href="/" class="home-link">Return Home</a>
         </div>
     </main>
-    <!-- Footer -->
     <footer class="footer">
         &copy; <?php echo date('Y'); ?> Building Portal. All rights reserved.
     </footer>
