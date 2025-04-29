@@ -20,7 +20,7 @@
     { "source": "/(.*)", "destination": "/$1" }
   ],
   "functions": {
-    "api/*.php": {
+    "api/**/*.php": {
       "runtime": "vercel-php@0.7.3",
       "excludeFiles": "**",
       "includeFiles": "api/*.php statics/**"
