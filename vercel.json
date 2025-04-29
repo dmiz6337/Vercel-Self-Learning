@@ -8,6 +8,7 @@
       "VERCEL_GIT_COMMIT_AUTHOR_LOGIN": "dmiz6337",
       "VERCEL": "1"
     },
+    "cleanUrls": true,
     "buildCommand": "npm run custom-build",
     "crons": [
       {
@@ -15,12 +16,14 @@
         "schedule": "0 0 * * *"
       }
     ],
-    "builds": [
-      { "src": "api/**/*.php", "use": "@vercel/php@0.7.3" },
-      { "src": "package.json", "use": "@vercel/next" }
-    ],
-    "routes": [
-      { "src": "/api/(.*\\.php)", "dest": "/api/$1" },
-      { "src": "/(.*)", "dest": "/$1" }
-    ]
+    "rewrites": [
+    { "source": "/(.*)", "destination": "/$1" }
+  ],
+  "functions": {
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.7.3",
+      "excludeFiles": "**",
+      "includeFiles": "api/*.php statics/**"
+    }
+  }
 }
