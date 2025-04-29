@@ -16,14 +16,12 @@
         "schedule": "0 0 * * *"
       }
     ],
-    "rewrites": [
-    { "source": "/(.*)", "destination": "/$1" }
-  ],
-  "functions": {
-    "api/**/*.php": {
-      "runtime": "vercel-php@0.7.3",
-      "excludeFiles": "**",
-      "includeFiles": "api/*.php statics/**"
-    }
-  }
+    "builds": [
+      { "src": "api/**/*.php", "use": "@vercel/php@0.7.3" },
+      { "src": "package.json", "use": "@vercel/next" }
+    ],
+    "routes": [
+      { "src": "/api/(.*\\.php)", "dest": "/api/$1" },
+      { "src": "/(.*)", "dest": "/$1" }
+    ]
 }
