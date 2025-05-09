@@ -9,8 +9,7 @@
     "VERCEL": "1"
   },
   "routes": [
-    { "src": "/phpinfo", "dest": "/api/index.php" },
-    { "src": "/api/auth/(.*)", "dest": "/api/auth/$1" }
+    { "src": "/phpinfo", "dest": "/api/index.php" }
   ],
   "functions": {
     "api/index.php": {
