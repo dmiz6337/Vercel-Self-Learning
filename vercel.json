@@ -10,7 +10,7 @@
   },
   "routes": [
     { "src": "/phpinfo", "dest": "/api/index.php" },
-    { "src": "/api/(.*)", "dest": "/app/api/$1" }
+    { "src": "/api/auth/(.*)", "dest": "/app/api/auth/$1" }
   ],
   "functions": {
     "api/index.php": {
