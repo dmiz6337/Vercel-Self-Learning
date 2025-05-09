@@ -1,29 +1,20 @@
 {
-    "version": 2,
-    "env": {
-      "VERCEL_ENV": "development",
-      "VERCEL_URL": "strata-body-corporate.vercel.app",
-      "VERCEL_GIT_PROVIDER": "github",
-      "VERCEL_GIT_BRANCH": "main",
-      "VERCEL_GIT_COMMIT_AUTHOR_LOGIN": "dmiz6337",
-      "VERCEL": "1"
-    },
-    "cleanUrls": true,
-    "buildCommand": "npm run custom-build",
-    "crons": [
-      {
-        "path": "/api/cron/daily-payment",
-        "schedule": "0 0 * * *"
-      }
-    ],
-    "rewrites": [
-    { "source": "/(.*)", "destination": "/$1" }
+  "version": 2,
+  "env": {
+    "VERCEL_ENV": "production",
+    "VERCEL_URL": "strata-management-vercel.vercel.app",
+    "VERCEL_GIT_PROVIDER": "github",
+    "VERCEL_GIT_BRANCH": "main",
+    "VERCEL_GIT_COMMIT_AUTHOR_LOGIN": "dmiz6337",
+    "VERCEL": "1"
+  },
+  "routes": [
+    { "src": "/phpinfo", "dest": "/api/index.php" }
   ],
   "functions": {
-    "api/**/*.php": {
+    "api/index.php": {
       "runtime": "vercel-php@0.7.3",
-      "excludeFiles": "**",
-      "includeFiles": "api/*.php statics/**"
+      "excludeFiles": "{public/**,uploads/**,vendor/**,node_modules/**,*.cache,*.zip,*.json,.next/**}"
     }
   }
 }

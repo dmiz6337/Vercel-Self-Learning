@@ -50,7 +50,7 @@
                 <p class="desc">Download the latest financial reports for your building.</p>
             </div>
             <div class="section-right">
-                <a href="/statics/2024-financial-report.pdf" class="download-btn" download>Download</a>
+                <a href="/statics/example.pdf" class="download-btn" download>Download</a>
             </div>
         </div>
         <!-- Section 3 -->
@@ -60,7 +60,7 @@
                 <p class="desc">Insurance certificates for building facilities & management staff.</p>
             </div>
             <div class="section-right">
-                <a href="/statics/insurance-certificates.pdf" class="download-btn" download>Download</a>
+                <a href="/statics/example.pdf" class="download-btn" download>Download</a>
             </div>
         </div>
         <!-- Return Home Button -->
