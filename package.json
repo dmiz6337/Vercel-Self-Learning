@@ -12,9 +12,6 @@
   },
   "author": "",
   "license": "ISC",
-  "engines": {
-    "node": "18.x"
-  },
   "dependencies": {
     "@libphp/amazon-linux-2-v83": ">=0.0.7",
     "@next-auth/prisma-adapter": "^1.0.7",
