@@ -10,6 +10,6 @@ export default withAuth({
 export const config = {
     // Only allow homepage and NextAuth sign-in page to be accessible without authentication
     matcher: [
-      "/((?!api/auth|api/auth/.*|_next/static|_next/image|statics|favicon.ico).*)"
+      "/((?!api/auth|api/auth/.*|_next/static|_next/image|statics|favicon.ico|$).*)"
     ]
 };
