@@ -14,5 +14,12 @@ export default function AuthButton() {
     );
   }
 
+  // If not signed in, show Google sign-in button
+  return (
+    <button onClick={() => signIn('google')}>
+      Sign in with Google
+    </button>
+  );
+
   return <button onClick={() => signIn()}>Sign in</button>;
 }
