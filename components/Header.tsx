@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import ThemeSwitch from "./ThemeSwitch";
-import { useSession, signIn, signOut } from "next-auth/react";
+import AuthButton from "./AuthButton";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
   const { data: session } = useSession();
@@ -72,21 +73,7 @@ export default function Header() {
             </li>
           </ul>
           <div className="flex items-center space-x-4">
-            {session?.user ? (
-              <button
-                onClick={() => signOut()}
-                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              >
-                Sign Out
-              </button>
-            ) : (
-              <button
-                onClick={() => signIn('github')}
-                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              >
-                Sign In
-              </button>
-            )}
+            <AuthButton />
             <ThemeSwitch />
           </div>
         </nav>
