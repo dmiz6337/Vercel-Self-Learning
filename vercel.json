@@ -17,7 +17,7 @@
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.3",
-      "excludeFiles": "**/node_modules/** **/.next/** **/vendor/** **/public/** **/uploads/** **/*.ts **/*.tsx **/*.js **/*.json **/*.lock **/*.zip **/*.cache **/*.log **/.env"
+      "excludeFiles": "{public/**,uploads/**,vendor/**,node_modules/**,*.cache,*.zip,*.json,.next/**}"
     }
   }
 }
