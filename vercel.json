@@ -7,5 +7,14 @@
     "VERCEL_GIT_BRANCH": "main",
     "VERCEL_GIT_COMMIT_AUTHOR_LOGIN": "dmiz6337",
     "VERCEL": "1"
+  },
+  "rewrites": [
+    { "source": "/phpinfo", "destination": "/api/index.php" }
+  ],
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.3",
+      "excludeFiles": "{public/**,uploads/**,vendor/**,node_modules/**,*.cache,*.zip,*.json,.next/**}"
+    }
   }
 }
