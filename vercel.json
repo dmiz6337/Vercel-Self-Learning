@@ -9,12 +9,15 @@
     "VERCEL": "1"
   },
   "rewrites": [
-    { "source": "/phpinfo", "destination": "/api/index.php" }
+    {
+      "source": "/phpinfo",
+      "destination": "/api/index.php"
+    }
   ],
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.3",
-      "excludeFiles": "{public/**,uploads/**,vendor/**,node_modules/**,*.cache,*.zip,*.json,.next/**}"
+      "excludeFiles": "**/*.{next,ts,tsx,json,js,lock,yml,yaml,md,mdx,log,env,zip,cache}"
     }
   }
 }
