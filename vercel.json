@@ -17,22 +17,7 @@
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.3",
-      "excludeFiles": [
-        "**/node_modules/**",
-        "**/.next/**",
-        "**/public/**",
-        "**/uploads/**",
-        "**/vendor/**",
-        "**/*.zip",
-        "**/*.cache",
-        "**/*.log",
-        "**/.env",
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.js",
-        "**/*.json",
-        "**/*.lock"
-      ]
+      "excludeFiles": "**/node_modules/** **/.next/** **/*.ts **/*.tsx **/*.js **/*.json **/*.lock **/*.zip **/*.cache **/*.log **/.env"
     }
   }
 }
