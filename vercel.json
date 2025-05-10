@@ -11,13 +11,13 @@
   "rewrites": [
     {
       "source": "/phpinfo",
-      "destination": "/api/php/index.php"
+      "destination": "/php/index.php"
     }
   ],
   "functions": {
-    "api/php/index.php": {
+    "php/index.php": {
       "runtime": "vercel-php@0.7.3",
-      "excludeFiles": "{public/**,uploads/**,vendor/**,node_modules/**,*.cache,*.zip,*.json}"
+      "excludeFiles": "{public/**,uploads/**,vendor/**,node_modules/**,*.cache,*.zip,*.json,.next/**}"
     }
   }
 }
