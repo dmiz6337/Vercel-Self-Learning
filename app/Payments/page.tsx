@@ -21,7 +21,7 @@ export default function PaymentPage() {
   useEffect(() => {
     const fetchPayments = () => {
       setLoading(true);
-      fetch("/api/payments")
+      fetch("/pay")
         .then((res) => res.json())
         .then((data) => {
           setPayments(data);
@@ -63,7 +63,7 @@ export default function PaymentPage() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`/api/pay/${id}`, {
+      const response = await fetch(`/pay/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -81,7 +81,7 @@ export default function PaymentPage() {
 
   const handleRefresh = () => {
     setLoading(true);
-    fetch("/api/pay")
+    fetch("/pay")
       .then((res) => res.json())
       .then((data) => {
         setPayments(data);
