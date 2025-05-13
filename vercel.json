@@ -12,6 +12,10 @@
     {
       "source": "/phpinfo",
       "destination": "api/php/index.php"
+    },
+    {
+      "source": "/api/auth/:match*",
+      "destination": "/auth/:match*"
     }
   ],
   "functions": {
