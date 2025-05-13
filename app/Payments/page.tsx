@@ -63,7 +63,7 @@ export default function PaymentPage() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`/api/payments/${id}`, {
+      const response = await fetch(`/api/pay/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -81,7 +81,7 @@ export default function PaymentPage() {
 
   const handleRefresh = () => {
     setLoading(true);
-    fetch("/api/payments")
+    fetch("/api/pay")
       .then((res) => res.json())
       .then((data) => {
         setPayments(data);
