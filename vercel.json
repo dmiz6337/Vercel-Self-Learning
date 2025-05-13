@@ -11,7 +11,8 @@
   "crons": [
     {
       "path": "/api/cron/daily-payment",
-      "schedule": "0 0 * * *"
+      "schedule": "0 0 * * *",
+      "method": "POST"
     }
   ],
   "rewrites": [

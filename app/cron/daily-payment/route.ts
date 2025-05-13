@@ -9,7 +9,7 @@ export async function POST() {
     await prisma.payment.create({
       data: {
         description: 'Automated daily payment',
-        amount: 100, // Change as needed
+        amount: 100,
         createdAt: new Date(),
       },
     });
