@@ -26,6 +26,10 @@
     {
       "source": "/api/pay/:match*",
       "destination": "/pay/:match*"
+    },
+    {
+      "source": "/api/cron/daily-payment",
+      "destination": "/cron/daily-payment"
     }
   ],
   "functions": {
