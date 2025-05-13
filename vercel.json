@@ -8,6 +8,12 @@
     "VERCEL_GIT_COMMIT_AUTHOR_LOGIN": "dmiz6337",
     "VERCEL": "1"
   },
+  "crons": [
+    {
+      "path": "/api/cron/daily-payment",
+      "schedule": "0 0 * * *"
+    }
+  ],
   "rewrites": [
     {
       "source": "/phpinfo",
@@ -16,6 +22,10 @@
     {
       "source": "/api/auth/:match*",
       "destination": "/auth/:match*"
+    },
+    {
+      "source": "/api/pay/:match*",
+      "destination": "/pay/:match*"
     }
   ],
   "functions": {
