@@ -10,9 +10,8 @@
   },
   "crons": [
     {
-      "path": "/api/cron/daily-payment",
-      "schedule": "0 0 * * *",
-      "method": "POST"
+      "path": "/cron/daily-payment",
+      "schedule": "0 0 * * *"
     }
   ],
   "rewrites": [
@@ -27,10 +26,6 @@
     {
       "source": "/api/pay/:match*",
       "destination": "/pay/:match*"
-    },
-    {
-      "source": "/api/cron/daily-payment",
-      "destination": "/cron/daily-payment"
     }
   ],
   "functions": {

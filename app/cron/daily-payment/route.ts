@@ -3,22 +3,21 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// POST /api/cron/daily-payment - run by Vercel cron
-export async function POST() {
-  try {
-    await prisma.payment.create({
-      data: {
-        description: 'Automated daily payment',
-        amount: 100,
-        createdAt: new Date(),
-      },
-    });
-    return NextResponse.json({ success: true, message: 'Daily payment added!' });
-  } catch (err) {
-    return NextResponse.json({ success: false, error: String(err) }, { status: 500 });
-  }
+async function addDailyPayment() {
+  await prisma.payment.create({
+    data: {
+      description: 'Automated daily payment',
+      amount: 100,
+      createdAt: new Date(),
+    },
+  });
+  return NextResponse.json({ success: true, message: 'Daily payment added!' });
 }
 
 export async function GET() {
-  return NextResponse.json({ status: 'ok' });
+  return addDailyPayment();
+}
+
+export async function POST() {
+  return addDailyPayment();
 }
