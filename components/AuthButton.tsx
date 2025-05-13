@@ -16,7 +16,7 @@ export default function AuthButton() {
 
   // If not signed in, show Google sign-in button
   return (
-    <button onClick={() => signIn('google')}>
+    <button onClick={() => signIn('google', { callbackUrl: process.env.NEXT_PUBLIC_API_URL})}>
       Sign in with Google
     </button>
   );
